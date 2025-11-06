@@ -1,6 +1,6 @@
 import flet as ft
 from UI.alert import AlertManager
-
+from UI.controller import Controller
 '''
     VIEW:
     - Rappresenta l'interfaccia utente
@@ -37,10 +37,27 @@ class View:
 
         # --- Sezione 2: Filtraggio ---
         # TODO
+        #dropDown musei
+        self.opzioni = [
+            ft.dropdown.Option(key=str(id_), text=f"{nome} - {tipologia}")
+            for id_, nome, tipologia in self.controller.get_opzioni_Museo()
+        ]
+        self.menu_musei= ft.Dropdown(
+            label="Museo",
+            options=self.opzioni,
+            width=300
+        )
+        epoche = self.controller.get_opzioni_epoca()
+        self.menu_epoca = ft.Dropdown(
+            label="epoca",
+            options=[ft.dropdown.Option(key=e, text=e) for e in epoche],
+            width=300
+        )
 
         # Sezione 3: Artefatti
         # TODO
-
+        self.artefattiF=ft.ListView(expand=True, spacing=5, padding=10, auto_scroll=True)
+        self.mostra_artefatti=ft.ElevatedButton("mostra artefatti",on_click=self.controller.mostra)
         # --- Toggle Tema ---
         self.toggle_cambia_tema = ft.Switch(label="Tema scuro", value=True, on_change=self.cambia_tema)
 
@@ -54,9 +71,15 @@ class View:
 
             # Sezione 2: Filtraggio
             # TODO
-
+            ft.Row(spacing=200,
+                   controls=[self.menu_musei,self.menu_epoca],
+                   alignment=ft.MainAxisAlignment.CENTER),
+            ft.Divider(),
             # Sezione 3: Artefatti
             # TODO
+            ft.Row(spacing=200,
+                   controls=[self.mostra_artefatti],
+                   alignment=ft.MainAxisAlignment.CENTER),
         )
 
         self.page.scroll = "adaptive"
