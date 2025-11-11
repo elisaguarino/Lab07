@@ -1,5 +1,5 @@
 from database import DB_connect
-from database.DB_connect import ConnessioneDB
+from database.DB_connect import get_connection
 from model.museoDTO import Museo
 
 """
@@ -14,7 +14,7 @@ class MuseoDAO:
     def read_museum():
         print("Executing read from database using SQL query")
         resultsM = []
-        cnx = ConnessioneDB.get_connection()
+        cnx = get_connection()
         if cnx is None:
             print("Connection failed")
             return None

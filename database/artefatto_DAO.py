@@ -1,4 +1,4 @@
-from database.DB_connect import ConnessioneDB
+from database.DB_connect import get_connection
 from model.artefattoDTO import Artefatto
 
 """
@@ -14,7 +14,7 @@ class ArtefattoDAO:
     def read_artefatto():
         print("Executing read from database using SQL query")
         resultsA = []
-        cnx = ConnessioneDB.get_connection()
+        cnx = get_connection()
         if cnx is None:
             print("Connection failed")
             return None
