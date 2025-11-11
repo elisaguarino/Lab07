@@ -1,7 +1,8 @@
 import mysql.connector
 from mysql.connector import errorcode
 import pathlib
-
+#ho dovuto modificare la connessione al database perche non sono riuscita a scaricare la versione richiesta
+#di PyCharm
 def get_connection() -> mysql.connector.connection:
     try:
         cnx = mysql.connector.connect(
